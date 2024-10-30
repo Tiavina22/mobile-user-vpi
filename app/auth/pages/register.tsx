@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
+import { View, Image, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
 
 import { registerUser } from '../api/api.register';
 import { router } from 'expo-router';
-
-
 
 const RegisterScreen: React.FC = () => {
     const [nom, setNom] = useState('');
@@ -12,7 +10,7 @@ const RegisterScreen: React.FC = () => {
     const [motdepasse, setMotdepasse] = useState('');
     const [confirmation, setConfirmation] = useState('');
 
-    const handleRegister = async () => {
+    const addRegister = async () => {
         try {
             const response = await registerUser(nom, email, motdepasse, confirmation);
             Alert.alert('Succès', 'Inscription réussie !', [{ text: 'OK', onPress: () => router.push('./login') }]);
@@ -27,11 +25,15 @@ const RegisterScreen: React.FC = () => {
 
     return (
         <View style={styles.container}>
+            <View style={styles.imageContainer}>
+                <Image source={require('@/assets/logo/logo.png')} style={styles.image} />
+            </View>
+            <Text style={styles.title}>S'inscrire</Text>
             <TextInput style={styles.input} placeholder="Nom" value={nom} onChangeText={setNom} />
             <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" />
             <TextInput style={styles.input} placeholder="Mot de passe" value={motdepasse} onChangeText={setMotdepasse} secureTextEntry />
             <TextInput style={styles.input} placeholder="Confirmer le mot de passe" value={confirmation} onChangeText={setConfirmation} secureTextEntry />
-            <Button title="S'inscrire" onPress={handleRegister} />
+            <Button title="S'inscrire" onPress={addRegister} />
         </View>
     );
 };
@@ -42,6 +44,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 16,
         backgroundColor: '#000',
+    },
+    imageContainer: {
+        alignItems: 'center', 
+        marginBottom: 20,
+    },
+    image: {
+        width: 100,
+        resizeMode: 'contain',
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: "white",
+        marginBottom: 20,
     },
     input: {
         height: 40,

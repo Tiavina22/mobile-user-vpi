@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Link, useRouter } from 'expo-router';
 import { styles } from '../styles/login';
 import { login } from '../api/api.login';  
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
 const LoginScreen: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -20,9 +21,13 @@ const LoginScreen: React.FC = () => {
     try {
       const data = await login(email, password);
 
+      
+
       if (data.token) {
         console.log('Token JWT:', data.token);
-        router.replace('../home/pages/home'); 
+        router.replace('/home/pages/home'); 
+         // Stocker le token dans AsyncStorage
+       await AsyncStorage.setItem('token', data.token); 
       }
     } catch (error: any) {
         console.log(error);
