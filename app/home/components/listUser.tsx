@@ -14,14 +14,14 @@ interface User {
 const UserList = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
-    const API_URL = `${BASE_URL}/managers`;
+    const API_URL = `${BASE_URL}`;
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const token = await AsyncStorage.getItem('token'); 
                 
-                const response = await axios.get<User[]>(API_URL, {
+                const response = await axios.get<User[]>(API_URL+'/managers', {
                     headers: {
                         Authorization: `Bearer ${token}`, 
                     },
@@ -62,7 +62,8 @@ const UserList = () => {
             setUsers(users.filter(user => user.id !== id));
             Alert.alert("Succès", "Utilisateur supprimé avec succès");
         } catch (error) {
-            Alert.alert('Erreur', 'Erreur lors de la suppression de l’utilisateur.');
+            
+            Alert.alert('Erreur', 'Erreur lors de la suppression de l’utilisateur. id : ' + id);
             console.error('Erreur lors de la suppression de l’utilisateur:', error);
         }
     };
@@ -83,7 +84,7 @@ const UserList = () => {
 
         try {
             const token = await AsyncStorage.getItem('token');
-            await axios.patch(`${API_URL}/disable/${id}`, {}, {
+            await axios.put(`${API_URL}/disable/${id}`, {}, {
                 headers: {
                     Authorization: `Bearer ${token}`, 
                 },
