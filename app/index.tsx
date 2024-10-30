@@ -1,15 +1,19 @@
-import { Text, View } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import LoginScreen from "./auth/pages/login";
 
-export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit hello.</Text>
-    </View>
-  );
+export default function Index(){
+    return (
+       <View style={styles.container}>
+        <LoginScreen/>
+       </View>
+    )
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      display: "flex",
+      backgroundColor: '#fff',
+    },
+  })
