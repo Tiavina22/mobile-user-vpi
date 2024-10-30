@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import LoginScreen from "./auth/pages/login";
+import RegisterScreen from "./auth/pages/register";
 
 export default function Index(){
     return (
-       <View style={styles.container}>
         <LoginScreen/>
-       </View>
+        // <RegisterScreen />
     )
 }
 

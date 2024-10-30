@@ -1,15 +1,23 @@
 import { Stack } from "expo-router";
 import React from "react";
-import { StatusBar } from "react-native";
+import { StatusBar, View, StyleSheet } from "react-native";
+
 
 export default function RootLayout() {
   return (
-    <>
-      <StatusBar backgroundColor="#6200ee" />
+    <View style={styles.container}>
+      <StatusBar backgroundColor="#000" />
       <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} /> {/* Écran de connexion */}
-        <Stack.Screen name="home/pages/home" options={{ headerShown: false }} /> {/* Écran d'accueil */}
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="auth/pages/register" options={{ headerShown: false }} />
+        <Stack.Screen name="home/pages/home" options={{ headerShown: false }} /> Écran d'accueil
       </Stack>
-    </>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

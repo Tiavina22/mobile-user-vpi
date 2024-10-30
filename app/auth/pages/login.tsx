@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Image, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'; 
-import { useRouter } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { styles } from '../styles/login';
 import { login } from '../api/api.login';  
 
@@ -73,8 +73,8 @@ const LoginScreen: React.FC = () => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Se connecter</Text>
       </TouchableOpacity>
-
-      <Text style={styles.footerText}>Vous n'avez pas de compte ? Inscrivez-vous ici.</Text>
+      <Text style={styles.footerText} onPress={() =>  router.push('/auth/pages/register')}>Vous n'avez pas de compte ? Inscrivez-vous ici.</Text>
+        {/* <Link href="./register" style={styles.footerText}>Vous n'avez pas de compte ? Inscrivez-vous ici.</Link> */}
     </View>
   );
 };
