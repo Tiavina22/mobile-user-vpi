@@ -1,15 +1,39 @@
 import React, { useState } from 'react';
-import { StyleSheet, Image, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { Image, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'; 
+import { useRouter } from 'expo-router';
+import { styles } from '../styles/login';
+import { login } from '../api/api.login';  
 
-const LoginScreen = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [secureTextEntry, setSecureTextEntry] = useState(true); 
+const LoginScreen: React.FC = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [secureTextEntry, setSecureTextEntry] = useState<boolean>(true);
+  const [emailError, setEmailError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
+  const router = useRouter(); 
 
-  const handleLogin = () => {
-    console.log('Email:', email);
-    console.log('Password:', password);
+  const handleLogin = async () => {
+    setEmailError('');
+    setPasswordError('');
+
+    try {
+      const data = await login(email, password);
+
+      if (data.token) {
+        console.log('Token JWT:', data.token);
+        router.replace('../home/pages/home'); 
+      }
+    } catch (error: any) {
+        console.log(error);
+      if (error.message.includes('Utilisateur non trouvé')) {
+        setEmailError(error.message); 
+      } else if (error.message.includes('Mot de passe invalide')) {
+        setPasswordError(error.message); 
+      } else {
+        setEmailError('Erreur inconnue, veuillez réessayer.'); 
+      }
+    }
   };
 
   const toggleSecureTextEntry = () => {
@@ -29,6 +53,7 @@ const LoginScreen = () => {
         value={email}
         autoCapitalize="none"
       />
+      {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
 
       <View style={styles.passwordContainer}>
         <TextInput
@@ -40,9 +65,10 @@ const LoginScreen = () => {
           secureTextEntry={secureTextEntry} 
         />
         <TouchableOpacity onPress={toggleSecureTextEntry} style={styles.iconContainer}>
-          <Icon name={secureTextEntry ? 'visibility-off' : 'visibility'} size={24} color="#023047" />
+          <Icon name={secureTextEntry ? 'visibility-off' : 'visibility'} size={18} color="#000" />
         </TouchableOpacity>
       </View>
+      {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Se connecter</Text>
@@ -52,76 +78,5 @@ const LoginScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-    backgroundColor: '#023047',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: "white",
-    marginTop: 20,
-    marginBottom: 20,
-    textAlign: 'left', 
-    width: '100%', 
-  },
-  input: {
-    height: 50,
-    width: '100%',
-    maxWidth: 400,
-    borderColor: '#cccccc',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    marginBottom: 16,
-    backgroundColor: '#ffffff',
-  },
-  passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    maxWidth: 400,
-    marginBottom: 16,
-    position: 'relative', 
-  },
-  passwordInput: {
-    height: 50,
-    flex: 1,
-    borderColor: '#cccccc',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    paddingRight: 40, 
-    backgroundColor: '#ffffff',
-  },
-  iconContainer: {
-    position: 'absolute',
-    right: 10,
-    zIndex: 1,
-  },
-  button: {
-    backgroundColor: '#007bff',
-    borderRadius: 8,
-    paddingVertical: 12,
-    marginVertical: 12,
-    width: '100%',
-    maxWidth: 400,
-  },
-  buttonText: {
-    color: '#ffffff',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-  footerText: {
-    textAlign: 'center',
-    marginTop: 16,
-    color: '#888888',
-  },
-});
 
 export default LoginScreen;
