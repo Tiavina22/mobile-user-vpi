@@ -10,6 +10,7 @@ export type RootStackParamList = {
     index: undefined;
     'pages/register': undefined;
     'pages/login': undefined;
+    'pages/createUser': undefined;
     'pages/home': undefined;
     'pages/updateUser': { user: User; onUpdateSuccess?: () => void; };
     'UserList': undefined;

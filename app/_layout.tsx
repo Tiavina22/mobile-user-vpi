@@ -6,6 +6,7 @@ import RegisterScreen from "./pages/register";
 import LoginScreen from "./pages/login";
 import HomeScreen from "./pages/home";
 import UpdateUser from './pages/updateUser';
+import CreateUser from './pages/createUser';
 import { RootStackParamList } from '../constants/type';
 import { styles } from "./styles/home.styles";
 
@@ -39,6 +40,11 @@ export default function RootLayout() {
                 <Stack.Screen
                     name="pages/updateUser"
                     component={UpdateUser}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="pages/createUser"
+                    component={CreateUser}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

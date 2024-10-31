@@ -31,6 +31,7 @@ const UserList = () => {
             const token = await AsyncStorage.getItem('token');
             if (!token) {
                 throw new Error('Token non trouvé');
+                setRefreshing(true)
             }
             const response = await axios.get<User[]>(`${API_URL}/managers`, {
                 headers: {
