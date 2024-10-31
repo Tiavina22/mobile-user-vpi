@@ -4,10 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    // alignItems: 'center',
-    padding: 16,
-    backgroundColor: '#000',
-    marginTop: 20,
+    backgroundColor: '#121212',
   },
   title: {
     fontSize: 18,
@@ -61,9 +58,13 @@ export const styles = StyleSheet.create({
     maxWidth: 400,
   },
   buttonText: {
-    color: '#ffffff',
-    textAlign: 'center',
-    fontWeight: 'bold',
+    backgroundColor: '#007bff',
+    borderRadius: 8,
+    paddingVertical: 12,
+    marginVertical: 12,
+    width: '100%',
+    maxWidth: 400,
+    alignSelf: 'center',
   },
   footerText: {
     textAlign: 'center',
@@ -77,5 +78,28 @@ export const styles = StyleSheet.create({
     textAlign: 'left', 
     width: '100%', 
   },
-  
+  buttonAddResponsable:{
+    backgroundColor: '#0B4163',
+    marginTop: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    borderRadius: 8, 
+    paddingVertical: 12, 
+    paddingHorizontal: 20, 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    elevation: 3,
+    shadowColor: '#000', 
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2, 
+    shadowRadius: 2.62, 
+  },
+  buttonAddResponsableText: {
+    color: '#ffffff', 
+    fontSize: 16, 
+    fontWeight: 'bold', 
+  },
 });

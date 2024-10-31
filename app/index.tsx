@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import LoginScreen from "./pages/auth/pages/login";
+import LoginScreen from "./pages/login";
 // import RegisterScreen from "./pages/auth/pages/register";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Home from "./pages/home/pages/home";
+import Home from "./pages/home";
 
 export default function Index(){
   const [isLoading, setIsLoading] = React.useState(true);

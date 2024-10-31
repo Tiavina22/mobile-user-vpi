@@ -34,6 +34,7 @@ const RegisterScreen: React.FC = () => {
             <TextInput style={styles.input} placeholder="Mot de passe" value={motdepasse} onChangeText={setMotdepasse} secureTextEntry />
             <TextInput style={styles.input} placeholder="Confirmer le mot de passe" value={confirmation} onChangeText={setConfirmation} secureTextEntry />
             <Button title="S'inscrire" onPress={addRegister} />
+            <Text style={{ color: 'white', marginTop: 20 , textAlign: 'center'}} onPress={() => router.push('./login')}>Vous avez déja un compte ? Se connceter</Text>
         </View>
     );
 };

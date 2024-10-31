@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Image, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'; 
 import { Link, useRouter } from 'expo-router';
-import { styles } from '../styles/login';
+import { styles } from '../styles/login.styles';
 import { login } from '../api/api.login';  
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
@@ -25,7 +25,7 @@ const LoginScreen: React.FC = () => {
 
       if (data.token) {
         console.log('Token JWT:', data.token);
-        router.replace('/home/pages/home'); 
+        router.replace('./home'); 
          // Stocker le token dans AsyncStorage
        await AsyncStorage.setItem('token', data.token); 
       }
@@ -78,7 +78,7 @@ const LoginScreen: React.FC = () => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Se connecter</Text>
       </TouchableOpacity>
-      <Text style={styles.footerText} onPress={() =>  router.push('/auth/pages/register')}>Vous n'avez pas de compte ? Inscrivez-vous ici.</Text>
+      <Text style={styles.footerText} onPress={() =>  router.push('./register')}>Vous n'avez pas de compte ? Inscrivez-vous ici.</Text>
         {/* <Link href="./register" style={styles.footerText}>Vous n'avez pas de compte ? Inscrivez-vous ici.</Link> */}
     </View>
   );
