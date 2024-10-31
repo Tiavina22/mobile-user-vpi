@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     // alignItems: 'center',
     padding: 16,
     backgroundColor: '#000',
+    marginTop: 20,
   },
   title: {
     fontSize: 18,
